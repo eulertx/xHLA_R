@@ -1,1 +1,3 @@
 sampleID	analysis.date	report.version	report_type	hla.Ai	hla.Aii	hla.Bi	hla.Bii	hla.Ci	hla.Cii	hla.DPB1i	hla.DPB1ii	hla.DQB1i	hla.DQB1ii	hla.DRB1i	hla.DRB1ii	crosschecked
+1901711S1CN	2019-05-04T03:46:41Z	1.2	hla_typing	A*11:01	A*11:01	B*40:02	B*40:02	C*08:21	C*08:21	NA	NA	NA	NA	DRB1*09:01	DRB1*09:01
+1901711S1CN	2019-05-04T03:46:41Z	1.2	hla_typing	A*11:01	A*11:01	B*40:02	B*40:02	C*08:21	C*08:21	NA	NA	NA	NA	DRB1*09:01	DRB1*09:01

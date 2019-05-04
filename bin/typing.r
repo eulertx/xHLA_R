@@ -16,6 +16,19 @@ options(mc.cores = detectCores())
 library(data.table)
 library(lpSolve)
 
+
+## zy add
+workingpath=system(paste('dirname ', align.path),intern=TRUE)
+cellularity=list.files(path=paste(workingpath, '/../',sep=""),pattern='cellularity.txt')
+cat (cellularity)
+if(!exists('cellularity')){
+	cellularity=0.8
+}else{
+	cellularity <- read.delim(paste(cellularity[1],sep=""),header=F)
+	cellularity <- cellularity$V1[1]
+}
+## end of zy add cellularity
+
 #all <- fread(sprintf("gzip -dc %s", align.path))
 all <- fread(align.path)
 setnames(all, c('q', 'qpos0', 'qpos', 't', 'tlen', 'ts', 'te', 'mis', 'type', 'msa', 'exon', 'specific', 'left', 'right', 'start', 'end'))
@@ -512,7 +525,12 @@ het.ratio <- het[,
 		ratio.imp = importance[which.max(heter.reads)] / importance[which.min(heter.reads)],
 		min = solution[which.min(heter.reads)]
 	), by = gene]
-het.ratio <- het.ratio[ratio >= 5 & (min.imp < 0.1 | ratio.imp >= 10)]
+# het.ratio <- het.ratio[ratio >= 5 & (min.imp < 0.1 | ratio.imp >= 10)]
+# mod to adapt low Tumor Content
+lowratio <- max(2,(1+cellularity)/(1-cellularity))
+cat (lowratio, cellularity, "\n")
+het.ratio <- het.ratio[ratio >= lowratio & (min.imp < 0.1 | ratio.imp >= 10)]
+
 more[solution %in% het.ratio$min, rank := 1000L + rank]
 setorder(more, rank)
 

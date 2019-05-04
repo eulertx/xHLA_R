@@ -12,7 +12,7 @@ S3=$1
 ID=$2
 OUT=hla-$ID
 DELETE=false
-FULL=false
+FULL=true
 
 while test $# -gt 0
 do
@@ -52,9 +52,9 @@ if [ "$FULL" = true ]; then
 fi
 
 # Clean up
-if [ "$DELETE" = true ]
-then
-	rm $OUT/${ID}.tsv
-	rm $OUT/${ID}.fq.gz
-	rm $OUT/${ID}.hla
-fi
+#if [ "$DELETE" = true ]
+#then
+#	rm $OUT/${ID}.tsv
+#	rm $OUT/${ID}.fq.gz
+#	rm $OUT/${ID}.hla
+#fi
